@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Лесовосток</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/icons.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body>
+    <div class="left-sidebar">
+        <div class="left-sidebar_logo">
+            <div class="logo-left"></div>
+        </div>
+        <div class="left-sidebar_item">
+            <div class="home-left"></div> Главная
+        </div>
+        <div class="left-sidebar_item">
+            <div class="market-left"></div> Маркетплейс
+        </div>
+        <div class="left-sidebar_item">
+            <div class="torgs-left"></div> Торги
+        </div>
+        <div class="left-sidebar_item">
+            <div class="part"></div>Мои участки
+        </div>
+        <div class="left-sidebar_item">
+            <div class="claims"></div>Мои заявления
+        </div>
+        <div class="left-sidebar_item">
+            <div class="production"></div>Продукция
+        </div>
+        <div class="left-sidebar_item left-sidebar_item-active">
+            <div class="claims-sell"></div> Заявки на<br> продажу
+        </div>
+        <div class="left-sidebar_copyright">
+            <div class="left-sidebar_copyright-top">Фонд развития<br> Дальнего Востока</div>
+            <div class="left-sidebar_copyright-bottom">&copy; 2020</div>
+        </div>
+    </div>
+    <div id="map">
+        <!-- верхний левый контрол карта-список -->
+        <div class="map-table">
+            <div class="map-table-left map-table-left-active">Карта</div>
+            <div class="map-table-right ">Список</div>
+        </div>
+        <!-- верхний правый контрол пользователя карты -->
+        <div class="map-top-right-wrapper">
+            <div class="map-top-right-wrapper__zoom">
+                <div class="map-top-right-wrapper__zoom-left">
+                    <div class="plus"></div>
+                </div>
+                <div class="map-top-right-wrapper__zoom-middle">5</div>
+                <div class="map-top-right-wrapper__zoom-right">
+                    <div class="minus"></div>
+                </div>
+            </div>
+            <div class="map-top-right-wrapper__layer">
+                <div class="layer layer-active"></div>
+                <!-- попап от иконки слоя -->
+                <div class="layer-popup hidden">
+                    <div class="layer-popup__header">
+                        <div class="layer-m"></div>
+                        Слои
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="parts-m1"></div>
+                        Лесные участки
+                        <div class="toggle toggle-active"></div>
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="kvartal-m2"></div>
+                        Квартальная сеть
+                        <div class="toggle"></div>
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="declaration-m3"></div>
+                        Лесные декларации
+                        <div class="toggle"></div>
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="security-m4"></div>
+                        Охряняемые территории
+                        <div class="toggle"></div>
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="fire-m5"></div>
+                        Пожары
+                        <div class="toggle"></div>
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="pulse-m6"></div>
+                        Мониторинг
+                        <div class="toggle"></div>
+                    </div>
+                    <div class="layer-popup__row">
+                        <div class="lands-m7"></div>
+                        План насаждений
+                        <div class="toggle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="map-top-right-wrapper__user">
+                <!-- <div class="person-menu person-menu-non-auth person-menu-auth"></div>Владимир Кантемировский -->
+                <div class="person-menu person-menu-non-auth"></div>Войти
+            </div>
+        </div>
+        <!-- Правый контрол подложек -->
+        <div class="map-right-wrapper hidden">
+            <div class="map-right">
+                <div class="substrates"></div>
+                <div class="baselayers-popup">
+                    <table class="table-baselayers-popup">
+                        <thead>
+                            <tr>
+                                <td colspan="3">
+                                    <label>Подложки</label>
+                                </td>
+                            </tr>
+                            <tr class="tr-td-spacer-10">
+                                <td class="tr-td-spacer-10">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="line">
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_sputnik_ru.png" class="baseLayer active" data="sputnik">
+                                </td>
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_satellite.png" class="baseLayer" data="satellite">
+                                </td>
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_osm_hybrid.png" class="baseLayer active" data="OSMHybrid">
+                                </td>
+                            </tr>
+                            <tr class="line">
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_sputnik_ru.png" class="baseLayer active" data="sputnik">
+                                </td>
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_satellite.png" class="baseLayer" data="satellite">
+                                </td>
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_osm_hybrid.png" class="baseLayer active" data="OSMHybrid">
+                                </td>
+                            </tr>
+                            <tr class="line">
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_sputnik_ru.png" class="baseLayer active" data="sputnik">
+                                </td>
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_satellite.png" class="baseLayer" data="satellite">
+                                </td>
+                                <td>
+                                    <img src="https://maps.kosmosnimki.ru/api/img/baseLayers/basemap_osm_hybrid.png" class="baseLayer active" data="OSMHybrid">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Нижний участок Авториз 1 -->
+        <div class="map-popup-part1 hidden">
+            <div class="map-popup-part1__header">Участок №967045</div>
+            <div class="map-popup-part1__wrapper-in style-4">
+                <div class="map-popup-part1__wrapper-in__header">Допустимые объемы изъятия (в год)</div>
+                <div class="map-popup-part1__wrapper-in__table">
+                    <div class="map-popup-part1__wrapper-in__table_row">
+                        <div class="map-popup-part1__wrapper-in__table_row-el el50">Порода</div>
+                        <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">Сосна</div>
+                    </div>
+                    <div class="map-popup-part1__wrapper-in__table_row">
+                        <div class="map-popup-part1__wrapper-in__table_row-el el50">Строка</div>
+                        <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">3 463</div>
+                    </div>
+                </div>
+                <div class="map-popup-part1__wrapper-in__header">Начальная ставка арендной платы</div>
+                <div class="map-popup-part1__wrapper-in__table">
+                    <div class="map-popup-part1__wrapper-in__table_row">
+                        <div class="map-popup-part1__wrapper-in__table_row-el el50">Квартал №1</div>
+                        <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">186 000 руб.</div>
+                    </div>
+                    <div class="map-popup-part1__wrapper-in__table_row">
+                        <div class="map-popup-part1__wrapper-in__table_row-el el50">Квартал №2</div>
+                        <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">364 000 руб.</div>
+                    </div>
+                </div>
+                <div class="map-popup-part1__wrapper-in__header">Начальная ставка арендной платы</div>
+                <div class="map-popup-part1__wrapper-in__table">
+                    <div class="map-popup-part1__wrapper-in__table_row">
+                        <div class="map-popup-part1__wrapper-in__table_row-el el50">Квартал №1</div>
+                        <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">186 000 руб.</div>
+                    </div>
+                    <div class="map-popup-part1__wrapper-in__table_row">
+                        <div class="map-popup-part1__wrapper-in__table_row-el el50">Квартал №2</div>
+                        <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">364 000 руб.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Нижний участок c диаграм Неавториз 2, 3, 4 -->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Участок №9670</div>
+            <div class="map-popup-part2__wrapper-in style-3">
+                <div class="map-popup-part2__wrapper-in-inside">
+                    <div class="map-popup-part2__wrapper-in-inside__left style-4">
+                        <div class="map-popup-part2__wrapper-in-inside__left__header">
+                            <div class="map-popup-part2__wrapper-in-inside__left__header-text">Лесничество: Читинское</div>
+                            <div class="map-popup-part2__wrapper-in-inside__left__header-text">Участковое лесничество: Городское, №9670</div>
+                        </div>
+                        <div class="map-popup-part2__wrapper-in__table1">
+                            <div class="map-popup-part2__wrapper-in__table1_row">
+                                Дата принятия решения о проведении аукциона
+                                <span>28.11.2018</span>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">
+                                Статус ацкциона
+                                <span>в процессе обработки</span>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">
+                                Период проведения аукциона и идентификатор лота аукциона
+                                <span>01.01.2019 - 0.01. 2021 <span>id: 3458463</span></span>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">
+                                Начальная ставка <span>687 000 руб.</span>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">
+                                Допустимые объемы изъятия (в год)
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="map-popup-part2__wrapper-in__table2">
+                            <div class="map-popup-part2__wrapper-in__table2_row">
+                                <div class="map-popup-part2__wrapper-in__table2_row-el el50">Сосна</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">3 463</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in-inside__right top--5 ">
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in_header">Породы</div>
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in">
+                            <div class="chart-wrap">
+                                <div id="chart1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Создание проекта лесного участка Авториз 5, 6  -->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">
+                Создание проекта лесного участка
+                <div class="map-popup-part2__header_right">
+                    <button class="map-popup-part2__header_right_button_1 disabled">Редактировать</button>
+                    <button class="map-popup-part2__header_right_button_2 disabled">Создать проект</button>
+                </div>
+            </div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table2">
+                    <div class="map-popup-part2__wrapper-in__table2_row table-header">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el10">ID</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el30">Статус<div class="triangle"></div>
+                        </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el30">Регион/субъект федерации<div class="triangle"></div>
+                        </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el30">Лесничество<div class="triangle"></div>
+                        </div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el10">Test</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test1</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test2</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test3</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el10">Test</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test1</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test2</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test3</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el10">Test</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test1</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test2</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test3</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el10">Test</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test1</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test2</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test3</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el10">Test</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test1</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test2</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test3</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el10">Test</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test1</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test2</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el30">Test3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  нижний участок Редактирование проекта лесного участка 6  -->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">
+                Редактирование участка №967045
+                <div class="map-popup-part2__header_right">
+                    <button class="map-popup-part2__header_right_button_1">Сохранить черновик</button>
+                    <button class="map-popup-part2__header_right_button_2">Создать заявку</button>
+                </div>
+            </div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part1__wrapper-in__header">Лесничество</div>
+                <div class="map-popup-part2__wrapper-in__table2">
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el33">Обидимское</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">967 048</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">960 Га</div>
+                    </div>
+                </div>
+                <div class="spacer-23"></div>
+                <div class="map-popup-part1__wrapper-in__header">Запас древесины</div>
+                <div class="map-popup-part2__wrapper-in__table2">
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el50">Сосна</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">3 463</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el50">Ель</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">688</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Лесная декларация Неавториз Авториз (на авториз нужно только добавить таймлайн) 7, 8  -->
+        <div class="map-popup-part2 map-popup-part2_full hidden">
+            <div class="map-popup-part2__header">
+                Лесная декларация №967000456045
+            </div>
+            <div class="map-popup-part2__wrapper-in wrapper-full-height style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">
+                        Наименование субъекта Российской Федерации
+                        <span>Забайкальский край</span>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">
+                        Орган исполнительной власти
+                        <span>Управление лесничествами Забайкальского края</span>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">
+                        Ответственное лицо
+                        <span>Петров В.Н.</span>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">
+                        Арендатор
+                        <span>ИП Николаев Н.С.</span>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">
+                        Договор аренды
+                        <span>№ 15467895 / 2019 от 15.04.2019</span>
+                    </div>
+                </div>
+                <!-- Документы к договору показывать только авторизованным пользователям -->
+                <div class="docs_declaration">
+                    <div class="docs"></div>Документы к договору аренды
+                </div>
+                <div class="spacer-23"></div>
+                <div class="map-popup-part2__wrapper-in__table2">
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Целевое назначение лесов </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">Эксплуатационные леса</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Категория защитных лесов </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Наименование лесничества (лесопарка)</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">Агинское</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Наименование участкового лесничества</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">Агинское</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Наименование урочища (при наличии)</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Номер лесного квартала </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">133</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Номер лесотаксационного выдела</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">14 часть</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Номер лесосеки</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">0,02</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Площадь лесосеки (лесотаксационного выдела)</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Площадь лесосеки (лесотаксационного выдела)</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Вид рубки </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Хозяйство</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Вырубаемая древесная порода </div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Единицы измерения</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">Объем заготовки</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal black el50">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Редактирование проекта лесного участка Авториз 9  -->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">
+                Участок №9678
+                <div class="map-popup-part2__header_right">
+                    <button class="map-popup-part2__header_right_button_1">Сохранить черновик</button>
+                    <button class="map-popup-part2__header_right_button_2">Создать заявку</button>
+                </div>
+            </div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part1__wrapper-in__header f-w-bold">Лесничество: Бадинское</div>
+                <div class="map-popup-part1__wrapper-in__header">Кварталы, включенные в проект лесного участка</div>
+                <div class="map-popup-part2__wrapper-in__table2">
+                    <div class="map-popup-part2__wrapper-in__table2_row table-header">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el50">Квартал</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50"></div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el el50">967042</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el50">34 450,0</div>
+                    </div>
+                </div>
+                <div class="spacer-23"></div>
+                <div class="map-popup-part1__wrapper-in__header">Запас древесины</div>
+                <div class="map-popup-part2__wrapper-in__table2">
+                    <div class="map-popup-part2__wrapper-in__table2_row table-header">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Порода</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Таксация</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Прогноз системы</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">С учетом ограничений</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Береза</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">120</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">150</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">0</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Ольха</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">120</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">150</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">0</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Осина</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">120</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">150</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">0</div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in__table2_row">
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">Сосна</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">120</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">150</div>
+                        <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el25">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Гарь Неподтвержден Неавтор 10-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Гарь</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Неподтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Преобладающая порода насаждений<span>Береза</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь гари (Га)<span>300</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения на арендованной территории (Га)<span>100</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>01.01.2019</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Выдел с диаграм Авториз 11-->
+        <div class="map-popup-part2 map-popup-part2_full">
+            <div class="map-popup-part2__header">Выдел</div>
+            <div class="map-popup-part2__wrapper-in">
+                <div class="map-popup-part2__wrapper-in-inside">
+                    <div class="map-popup-part2__wrapper-in-inside__left style-4">
+                        <div class="map-popup-part2__wrapper-in-inside__left__header">
+                            <div class="map-popup-part2__wrapper-in-inside__left__header-text">Читинское лесничество, Городское участковое леничество, Колхоз “Вечерняя зорька”</div>
+                        </div>
+                        <div class="map-popup-part2__wrapper-in__table1">
+                            <div class="map-popup-part2__wrapper-in__table1_row">Целевое назначение лесов <span>Эксплуатационные леса</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Год актуализации <span>2019</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Площадь выдела (Га) <span>10,5</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Категория земель <span>Насаждения естественного происхождения</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Тип вырубки (рекомендованно) <span>-</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Ообо защитные участки (ОЗУ) <span>глухариные тока</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Экспозиция / Крутизна <span>ЮЗ / 20</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Целевая порода <span>Кедр</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Преобладающая порода <span>Сосна</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Группа возраста <span>Спелые</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Запас выдела (Куб.м / Га) <span>280</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Класс возраста <span>4</span></div>
+                        </div>
+                        <div class="map-popup-part2__wrapper-in__table2">
+                            <div class="map-popup-part2__wrapper-in__table2_row table-header">
+                                <div class="map-popup-part2__wrapper-in__table2_row-el el33">Мероприятие</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el el33">Вид деятельности</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el el33">Процент вырубки</div>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table2_row">
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">Хозяйственное мероприятие 1</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">Сан. рубка</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">30</div>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table2_row">
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">Хозяйственное мероприятие 2</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">Рубка ухода</div>
+                                <div class="map-popup-part2__wrapper-in__table2_row-el f-w-normal el33">20</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in-inside__right ">
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in_header">Породы</div>
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in">
+                            <div class="chart-wrap">
+                                <div id="chart2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Гарь Подтвержден Неавтор 12-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Гарь</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Подтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Преобладающая порода насаждений<span>Береза</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Пройденная пожаром площадь (Га)<span>300</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Пройденная пожаром площадь насаждений, из которых возможна реализация древесины (Га)<span>100</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь культур (Га)<span>200</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь молодняков естественного происхождения (Га)<span>50</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь горельников прошлых лет (Га)<span>150</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь редин и не покрытых лесом земель (Га) <span>230</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>01.01.2020</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обследования<span></span>05.05.2020</div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Выдел слой кварт сеть с диаграм Авториз  13-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Выдел</div>
+            <div class="map-popup-part2__wrapper-in style-3">
+                <div class="map-popup-part2__wrapper-in-inside">
+                    <div class="map-popup-part2__wrapper-in-inside__left overflow-hidden">
+                        <div class="map-popup-part2__wrapper-in-inside__left__header">
+                            <div class="map-popup-part2__wrapper-in-inside__left__header-text">Читинское лесничество, Городское участковое леничество, Колхоз “Вечерняя зорька”, Квартал №15, Выдел №59</div>
+                        </div>
+                        <div class="spacer-23"></div>
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in_header">Породы</div>
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in margin-left-30">
+                            <div class="chart-wrap">
+                                <div id="chart3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in-inside__right top--5">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Патология неподтвержд Неавтриз 14-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Патология</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Неподтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения всего (Га)<span>250</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения на арендованной территории (Га)<span>170</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>01.01.2020</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап ООПТ Авториз 15-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Особо охраняемая природная территория</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Наименование<span>Цасучейский бор</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Категория ООПТ<span>Заказник</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Постановление<span>Приказ МПР №16 от 13.05ю2005</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Уровень защиты<span>Федеральный</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь (кв.м.)<span>549</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Патология подтвержд Неавтриз 16-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Патология</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Подтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения всего (Га)<span>250</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения на арендованной территории (Га)<span>170</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>01.01.2020</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обследования<span>20.08.2020</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Лесные насаждения Авториз 16-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Лесные насаждения</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Порода<span>Береза</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Группа возраста<span>Средний возраст</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Культуры<span>Под пологом</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Пожар Неавториз + Авториз (на авториз нужно только добавить таймлайн) 17-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Пожар</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>2020.07.09 02:37:00</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Спутник<span>A</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Источник<span>СКАНЭКС</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Достоверность<span>89%</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Температура (К)<span>333.70001220703125</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Мощность пожара<span>142.3000030517578</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Координаты<span>65.050003 N, 125.68900 E</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Рубка неподтвержденная Неавториз 18-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Рубка</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Неподтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения всего (Га)<span>250</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения на арендованной территории (Га)<span>250</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>15.07.2019</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Преобладающая природа насаждений<span>Береза</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Рубка подтвержденная Авториз 19-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Рубка</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Подтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения всего (Га)<span>250</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения на арендованной территории (Га)<span>250</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>15.08.2020</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обследования<span>20.08.2020</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Преобладающая природа насаждений<span>Береза</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап Гарь подтвержден Неавтор 20-->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Гарь</div>
+            <div class="map-popup-part2__wrapper-in style-4">
+                <div class="map-popup-part2__wrapper-in__table1">
+                    <div class="map-popup-part2__wrapper-in__table1_row">Статус<span>Подтвержденный инцидент</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Преобладающая порода насаждений<span>Береза</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Пройденная пожаром площадь (Га)<span>300</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Пройденная пожаром площадь насаждений, из которых возможна реализация древесины (Га)<span>100</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь культур (Га)<span>200</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь молодняков естественного происхождения (Га)<span>50</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь горельников прошлых лет (Га)<span>150</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Площадь редин и не покрытых лесом земель (Га)<span>230</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения<span>15.08.2020</span></div>
+                    <div class="map-popup-part2__wrapper-in__table1_row">Дата обследования<span>20.08.2020</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Мои лесные участки Авториз 21 -->
+        <div class="map-popup-part2 hidden">
+            <div class="map-popup-part2__header">Участок №967045</div>
+            <div class="map-popup-part2__wrapper-in style-3">
+                <div class="map-popup-part2__wrapper-in-inside">
+                    <div class="map-popup-part2__wrapper-in-inside__left style-4">
+                        <div class="map-popup-part2__wrapper-in__table1">
+                            <div class="map-popup-part2__wrapper-in__table1_row">Кадастровый номер <span>25:28:050071:1290</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Номер договора аренды <span>0500711290</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Срок договора аренды <span>01.01.2019 - 01.01.2021</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Стоимость договора аренды <span>3 230 000 руб.</span></div>
+                        </div>
+                        <div class="docs_declaration">
+                            <div class="docs"></div>Документы к договору аренды
+                        </div>
+                        <div class="spacer-23"></div>
+                        <div class="map-popup-part1__wrapper-in__header">Допустимые объемы изъятия (в год)</div>
+                        <div class="map-popup-part1__wrapper-in__table">
+                            <div class="map-popup-part1__wrapper-in__table_row">
+                                <div class="map-popup-part1__wrapper-in__table_row-el el50">Сосна</div>
+                                <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">3463</div>
+                            </div>
+                            <div class="map-popup-part1__wrapper-in__table_row">
+                                <div class="map-popup-part1__wrapper-in__table_row-el el50">Береза</div>
+                                <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">2 463</div>
+                            </div>
+                            <div class="map-popup-part1__wrapper-in__table_row">
+                                <div class="map-popup-part1__wrapper-in__table_row-el el50">Ель</div>
+                                <div class="map-popup-part1__wrapper-in__table_row-el f-w-normal el50">2 463</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in-inside__right top--5 ">
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in_header">Породы</div>
+                        <div class="map-popup-part2__wrapper-in-inside__right-wrapper-in">
+                            <div class="chart-wrap">
+                                <div id="chart4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Сводная Аналитика 22 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">Тип отчета</div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50 disabled">Сформировать отчет</button>
+            </div>
+            <div class="spacer-gray"></div>
+        </div>
+        <!-- папап  Сводная Аналитика 23 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Тип отчета</div>
+                <div class="custom__header-50">&nbsp;</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50">Сформировать отчет</button>
+            </div>
+            <div class="spacer-23"></div>
+            <div class="spacer-gray"></div>
+            <div class="spacer-34"></div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Регион</div>
+                <div class="custom__header-50">Лесничество</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Забайкальский край</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Читинское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Участковое лесничество</div>
+                <div class="custom__header-50">Период</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Городское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                    <div class="map-middle-wrapper-profile-date-wrapper date-wrapper-100">
+                        <input type="date" name="input-date-1" class="input-date">
+                        <input type="date" name="input-date-1" class="input-date">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Сводная Аналитика 24 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Тип отчета</div>
+                <div class="custom__header-50">&nbsp;</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50">Сформировать отчет</button>
+            </div>
+            <div class="spacer-23"></div>
+            <div class="spacer-gray"></div>
+            <div class="spacer-34"></div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Регион</div>
+                <div class="custom__header-50">Лесничество</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Забайкальский край</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Читинское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Участковое лесничество</div>
+                <div class="custom__header-50">Период</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Городское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                    <div class="map-middle-wrapper-profile-date-wrapper date-wrapper-100">
+                        <input type="date" name="input-date-1" class="input-date">
+                        <input type="date" name="input-date-1" class="input-date">
+                    </div>
+                </div>
+            </div>
+            <div class="spacer-27"></div>
+            <div class="spacer-gray"></div>
+            <div class="map-middle-wrapper-profile-header black">Соотношение&nbsp;<span class="green">оплаченной</span>&nbsp;и&nbsp;<span class="blue">вырубленной</span>&nbsp;древесины
+            </div>
+            <div class="chart-row">
+                <div class="chart-row__left">
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">838 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg"></div>
+                            <div class="chart-row__left-el-chart__text_bot">Всего</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">838 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">418 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg" style="height: 94px"></div>
+                            <div class="chart-row__left-el-chart__text_bot red">Дуб</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">614 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg" style="height: 150px"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">558 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg" style="height: 137px"></div>
+                            <div class="chart-row__left-el-chart__text_bot">Береза</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">263 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg" style="height: 54px"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">501 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg" style="height: 118px"></div>
+                            <div class="chart-row__left-el-chart__text_bot">Сосна</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">488 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg" style="height: 110px"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-row__right">
+                    <div class="chart-row__right_line">
+                        <div class="rec green-bg"></div>
+                        <div class="rec-text">Оплачено</div>
+                    </div>
+                    <div class="chart-row__right_line">
+                        <div class="rec blue-bg"></div>
+                        <div class="rec-text">Вырублено</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Сводная Аналитика 25 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Тип отчета</div>
+                <div class="custom__header-50">&nbsp;</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50">Сформировать отчет</button>
+            </div>
+            <div class="spacer-23"></div>
+            <div class="spacer-gray"></div>
+            <div class="spacer-34"></div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Регион</div>
+                <div class="custom__header-50">Лесничество</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Забайкальский край</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Читинское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Участковое лесничество</div>
+                <div class="custom__header-50">Период</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Городское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                    <div class="map-middle-wrapper-profile-date-wrapper date-wrapper-100">
+                        <input type="date" name="input-date-1" class="input-date">
+                        <input type="date" name="input-date-1" class="input-date">
+                    </div>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Выбор породы</div>
+                <div class="custom__header-50"></div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Лиственница</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                </div>
+            </div>
+        </div>
+        <!-- папап  Сводная Аналитика 26 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Тип отчета</div>
+                <div class="custom__header-50">&nbsp;</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50">Сформировать отчет</button>
+            </div>
+            <div class="spacer-23"></div>
+            <div class="spacer-gray"></div>
+            <div class="spacer-34"></div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Регион</div>
+                <div class="custom__header-50">Лесничество</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Забайкальский край</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Читинское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Участковое лесничество</div>
+                <div class="custom__header-50">Период</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Городское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                    <div class="map-middle-wrapper-profile-date-wrapper date-wrapper-100">
+                        <input type="date" name="input-date-1" class="input-date">
+                        <input type="date" name="input-date-1" class="input-date">
+                    </div>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Выбор породы</div>
+                <div class="custom__header-50"></div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Лиственница</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="horizont-first">Прирост</div>
+                <div class="horizont-sec">
+                    <div class="horizont-sec-act green-bg" style="width: 38px"></div>
+                </div>
+                <div class="horizont-third green">365 м<sup>3</sup></div>
+                <div class="horizont-4">на сумму&nbsp;&nbsp;<span class="green">3,6 млн. руб.</span></div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="horizont-first">Сгорело</div>
+                <div class="horizont-sec">
+                    <div class="horizont-sec-act red-bg" style="width: 11px"></div>
+                </div>
+                <div class="horizont-third red">65 м<sup>3</sup></div>
+                <div class="horizont-4">на сумму&nbsp;&nbsp;<span class="red">0,4 млн. руб.</span></div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="horizont-first">Вырубили</div>
+                <div class="horizont-sec">
+                    <div class="horizont-sec-act red-bg" style="width: 59px"></div>
+                </div>
+                <div class="horizont-third red">248 м<sup>3</sup></div>
+                <div class="horizont-4">на сумму&nbsp;&nbsp;<span class="red">4,3 млн. руб.</span></div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="horizont-first">Изменение баланса</div>
+                <div class="horizont-sec">
+                    <div class="horizont-sec-act red-bg" style="width: 28px"></div>
+                </div>
+                <div class="horizont-third red">32 м<sup>3</sup></div>
+                <div class="horizont-4">на сумму&nbsp;&nbsp;<span class="red">-0,3 млн. руб.</span></div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="horizont-first">Итого</div>
+                <div class="horizont-sec">
+                    <div class="horizont-sec-act green-bg" style="width: 100%"></div>
+                </div>
+                <div class="horizont-third gray">125 684 м<sup>3</sup></div>
+                <div class="horizont-4">&nbsp;</div>
+            </div>
+        </div>
+        <!-- папап  Сводная Аналитика 27 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Тип отчета</div>
+                <div class="custom__header-50">&nbsp;</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50">Сформировать отчет</button>
+            </div>
+            <div class="spacer-23"></div>
+            <div class="spacer-gray"></div>
+            <div class="spacer-34"></div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Регион</div>
+                <div class="custom__header-50">Лесничество</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Забайкальский край</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Читинское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Выбор породы</div>
+                <div class="custom__header-50">Период</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Лиственница</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                    <div class="map-middle-wrapper-profile-date-wrapper date-wrapper-100">
+                        <input type="date" name="input-date-1" class="input-date">
+                        <input type="date" name="input-date-1" class="input-date">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- папап  Сводная Аналитика 28 -->
+        <div class="map-popup-part2 map-popup-part-svod hidden">
+            <div class="map-middle-wrapper-profile-header">Сводная аналитика</div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Тип отчета</div>
+                <div class="custom__header-50">&nbsp;</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Тип отчета</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <button class="map-popup-part2__header_right_button_2 width-50">Сформировать отчет</button>
+            </div>
+            <div class="spacer-23"></div>
+            <div class="spacer-gray"></div>
+            <div class="spacer-34"></div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Регион</div>
+                <div class="custom__header-50">Лесничество</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Забайкальский край</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Читинское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-middle-wrapper-profile-h2">
+                <div class="custom__header-50">Выбор породы</div>
+                <div class="custom__header-50">Период</div>
+            </div>
+            <div class="map-middle-wrapper-profile-row_price-wrapper map-middle-wrapper-profile-row_price-wrapper-drop-100">
+                <div class="custom__select custom__select-50">
+                    <select class="style-4">
+                        <option value="0">Городское</option>
+                        <option value="1">Текст0</option>
+                        <option value="2">Текст1</option>
+                        <option value="3">Текст2</option>
+                        <option value="4">Текст3</option>
+                        <option value="5">Текст4</option>
+                        <option value="6">Текст5</option>
+                        <option value="7">Текст6</option>
+                        <option value="8">Текст7</option>
+                        <option value="9">Текст8</option>
+                        <option value="10">Текст9</option>
+                        <option value="11">Текст10</option>
+                    </select>
+                </div>
+                <div class="custom__select-50">
+                    <div class="map-middle-wrapper-profile-date-wrapper date-wrapper-100">
+                        <input type="date" name="input-date-1" class="input-date">
+                        <input type="date" name="input-date-1" class="input-date">
+                    </div>
+                </div>
+            </div>
+            <div class="spacer-27"></div>
+            <div class="spacer-gray"></div>
+            <div class="map-middle-wrapper-profile-header black">Соотношение&nbsp;<span class="green">оплаченной</span>&nbsp;и&nbsp;<span class="blue">вырубленной</span>&nbsp;древесины
+            </div>
+            <div class="chart-row">
+                <div class="chart-row__left">
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">838 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg"></div>
+                            <div class="chart-row__left-el-chart__text_bot">ООО Рогитин</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">838 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">418 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg" style="height: 94px"></div>
+                            <div class="chart-row__left-el-chart__text_bot red">ООО “Дельфин”</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">614 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg" style="height: 150px"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">558 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg" style="height: 137px"></div>
+                            <div class="chart-row__left-el-chart__text_bot">ООО Кедр</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">263 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg" style="height: 54px"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                    <div class="chart-row__left-el">
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">501 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow green-bg" style="height: 118px"></div>
+                            <div class="chart-row__left-el-chart__text_bot">ИП Ванин И.И.</div>
+                        </div>
+                        <div class="chart-row__left-el-chart">
+                            <div class="chart-row__left-el-chart__text">488 м<sup>3</sup></div>
+                            <div class="chart-row__left-el-chart__arrow blue-bg" style="height: 110px"></div>
+                            <div class="chart-row__left-el-chart__text_bot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-row__right">
+                    <div class="chart-row__right_line">
+                        <div class="rec green-bg"></div>
+                        <div class="rec-text">Оплачено</div>
+                    </div>
+                    <div class="chart-row__right_line">
+                        <div class="rec blue-bg"></div>
+                        <div class="rec-text">Вырублено</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- попап матричных слоев 29 -->
+        <div class="map-popup-layer-matrix hidden">
+            <div class="map-popup-layer-matrix-header">
+                <div class="matrix-header"></div>
+                Матрица слоёв
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon red-full"></div>
+                Red Full
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon red-middle"></div>
+                Red Middle
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon red-empty"></div>
+                Red Empty
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon orange-full"></div>
+                Orange Full
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon orange-middle"></div>
+                Orange Middle
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon orange-empty"></div>
+                Orange Empty
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon yellow-full"></div>
+                Yellow Full
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon yellow-middle"></div>
+                Yellow Middle
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon yellow-empty"></div>
+                Yellow Empty
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon green-full"></div>
+                Green Full
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon green-middle"></div>
+                Green Middle
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon green-empty"></div>
+                Green Empty
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon blue-full"></div>
+                Blue Full
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon blue-middle"></div>
+                Blue Middle
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon blue-empty"></div>
+                Blue Empty
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon gray-full"></div>
+                Gray Full
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon gray-middle"></div>
+                Gray Middle
+                <div class="toggle toggle-active"></div>
+            </div>
+            <div class="map-popup-layer-matrix-row">
+                <div class="matrix-icon gray-empty"></div>
+                Gray Empty
+                <div class="toggle toggle-active"></div>
+            </div>
+        </div>
+        <!-- Рубка в Работе 30-->
+        <div class="map-popup-part2 map-popup-part2_full hidden">
+            <div class="map-popup-part2__header">Рубка</div>
+            <div class="map-popup-part2__wrapper-in wrapper-full-height">
+                <div class="map-popup-part2__wrapper-in-inside">
+                    <div class="map-popup-part2__wrapper-in-inside__left style-4">
+                        <div class="map-popup-part2__wrapper-in-inside__left__header">
+                            <div class="map-popup-part2__wrapper-in-inside__left__header-text">Читинское лесничество, Городское участковое леничество, Колхоз “Вечерняя зорька”, Квартал №15, Выдел №59</div>
+                        </div>
+                        <div class="spacer-23"></div>
+                        <div class="map-popup-part2__wrapper-in__table1">
+                            <div class="map-popup-part2__wrapper-in__table1_row">Статус <span>Инцидент в работе</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Ответственный эксперт <span>Иванов И.И.</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Ответственный за проверку инцидента <span>Петров П.П</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Процент вероятности инцидента <span>85 %</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Точность для детектированных изменений <span>11 м</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Дата обнаружения <span>15.07.2019</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Площадь повреждения всего (Га) <span>250</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Срок провевдения натурной проверки <span class="span-gray">25.05.2019</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Комментарий</div>
+                            <textarea class="usr-text-area">
+                            </textarea>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Снимок с БПЛА:</div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">
+                                <span>02.07.2020, 12:24</span>
+                                <span>Снимок зоны инцидента с БПЛА.tiff</span>
+                                <div class="group_buttons">
+                                    <div class="mini-green-but">Просмотр</div>
+                                    <div class="mini-green-but">Загрузить</div>
+                                    <div class="mini-green-but">Удалить</div>
+                                </div>
+                            </div>
+                            <div class="map-popup-part2__wrapper-in__table1_row margin-top-35"><span class="span_bold">Объем изменений запасов древесины</span> <span class="span_bold">по прогнозам системы</span> <span class="span_bold">по данным натурной проверки</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Читинское лесничество, Городское участковое лесничество, Колхоз “Вечерняя зорька”, Квартал № 115, Выдел № 58</div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Арендатор <span>ООО “Дельфин”</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Читинское лесничество, Городское участковое лесничество, Колхоз “Вечерняя зорька”, Квартал № 115, Выдел № 58</div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Арендатор <span>ООО “Дельфин”</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Читинское лесничество, Городское участковое лесничество, Колхоз “Вечерняя зорька”, Квартал № 115, Выдел № 58</div>
+                            <div class="map-popup-part2__wrapper-in__table1_row">Арендатор <span>ООО “Дельфин”</span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                            <div class="map-popup-part2__wrapper-in__table1_row padding-left-34">Береза <span class="inline-flex-row-end">240 куб.м.<span class="span-gray">140 куб.м.</span></span></div>
+                        </div>
+                    </div>
+                    <div class="map-popup-part2__wrapper-in-inside__right rubka">
+                        <div class="right-wrapper-top ">
+                            <button class="map-popup-part2__header_right_button_2 width-50">Документы</button>
+                            <button class="map-popup-part2__header_right_button_2 width-50">Редактировать контур</button>
+                            <button class="map-popup-part2__header_right_button_2 width-50">Сохранить изменения</button>
+                            <button class="map-popup-part2__header_right_button_2 width-50">Выгрузить контур</button>
+                            <button class="map-popup-part2__header_right_button_2 width-50">Растр вероятности</button>
+                            <button class="map-popup-part2__header_right_button_2 width-50">Маски облачности и воды</button>
+                        </div>
+
+                         <div class="right-wrapper-bottom ">
+                            <button class="map-popup-part2__header_right_button_2 width-50">Подтвердить инцидент</button>
+                            <button class="map-popup-part2__header_right_button_2 width-50">Отклонить инцидент</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- копирайт внизу карты -->
+        <div class="map-copyright">
+            <div class="map-copyright__img"></div>
+        </div>
+    </div>
+</body>
+<script src="js/main.js"></script>
+<script>
+var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+chart1.render();
+var chart2 = new ApexCharts(document.querySelector("#chart2"), options1);
+chart2.render();
+var chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
+chart3.render();
+var chart4 = new ApexCharts(document.querySelector("#chart4"), options1);
+chart4.render();
+</script>
+
+</html>
